@@ -9,6 +9,6 @@ const WalletMultiButtonDynamic = dynamic(
 
 export default function ConnectWalletButton({ children }: PropsWithChildren) {
     return (
-        <WalletMultiButtonDynamic>{children}</WalletMultiButtonDynamic>
+        <WalletMultiButtonDynamic className="text-foreground">{children}</WalletMultiButtonDynamic>
     )
 }

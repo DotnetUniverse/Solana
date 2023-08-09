@@ -25,19 +25,22 @@ export const Layout = ({ children }: PropsWithChildren) => {
     const wallets = useMemo(() => [new PhantomWalletAdapter(), new SolflareWalletAdapter()], [network])
 
     return (
-        <div className="p-4">
+        <div className="p-4 min-h-full w-full">
             <ConnectionProvider endpoint={endpoint}>
                 <WalletProvider wallets={wallets} autoConnect>
                     <WalletModalProvider>
                         <header className="flex flex-row justify-between items-center">
+                            <div className="flex flex-row justify-between items-center gap-4">
+<h1 className="text-2xl text-green-500">B A P C A I</h1>
                             <NavigationMenuHeader />
+                            </div>
                             <div className="flex flex-row justify-center items-center">
                                 <ConnectWalletButton />
                                 <ModeToggle />
                             </div>
                         </header>
-                        <main>
-                            {children}
+                        <main className="flex justify-center py-4">                            
+                                {children}
                         </main>
                     </WalletModalProvider>
                 </WalletProvider>
