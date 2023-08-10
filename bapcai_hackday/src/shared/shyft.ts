@@ -72,10 +72,10 @@ export function burnNFT(body: BurnNFTRequestBody) {
     body: JSON.stringify(body),
   })
 }
-
+// {{url}}/nft/read_all?network=devnet&address=CtAzDwc4wTUApLdhjMYX4dWPbzLa9uA5JWLxvhuzZ6k4
 export function readAllNFTs(wallet: string, network: Network) {
-  return fetcher<BaseResponse<{ nfts: Nft[] }>>(
-    `${SHYFT_API_ENDPOINT}/sol/v1/nft/compressed/read_all?network=${network}&wallet_address=${wallet}`,
+  return fetcher<BaseResponse<Nft[]>>(
+    `${SHYFT_API_ENDPOINT}/sol/v1/nft/read_all?network=${network}&address=${wallet}`,
     {
       method: "GET",
       headers: {
@@ -83,7 +83,7 @@ export function readAllNFTs(wallet: string, network: Network) {
         "x-api-key": process.env.NEXT_PUBLIC_SHYFT_API_KEY!,
       },
     }
-  )
+  );
 }
 
 export function readNFT(nftAddress: string, network: Network) {

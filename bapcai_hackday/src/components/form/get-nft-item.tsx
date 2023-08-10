@@ -10,13 +10,14 @@ type NFTItemProps = {
 };
 
 export function NFTItem({ nft, network }: NFTItemProps) {
+  console.log(nft)
   return (
     <a
       href={`https://translator.shyft.to/address/${nft.mint}?cluster=${network}&compressed=true`}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+      <div className="overflow-hidden rounded-2xl shadow-card backdrop-blur">
         <AspectRatio>
           <img
             className="w-full h-auto object-cover"
@@ -42,7 +43,7 @@ export function NFTItem({ nft, network }: NFTItemProps) {
 
 export function NFTItemSkeleton() {
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+    <div className="overflow-hidden rounded-2xl  backdrop-blur shadow-card">
       <AspectRatio>
         <Skeleton className="h-full w-full" />
       </AspectRatio>
