@@ -87,7 +87,7 @@
 
 "@hookform/resolvers@^3.2.0":
   version "3.2.0"
-  resolved "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-3.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-3.2.0.tgz#0f48f57d464a216fa4a2d76b0f1317b91f91e99b"
   integrity sha512-skXQHhLxq0Sz2xDwCyv5dygBCtXJe1GmWwxDzfdtl0X6agD6qcyTG8HrZWkjJoy8AkiLARqYvSYJ8z7+Nwmi7w==
 
 "@humanwhocodes/config-array@^0.11.10":
@@ -706,9 +706,9 @@
     "@wallet-standard/features" "^1.0.3"
     eventemitter3 "^4.0.7"
 
-"@solana/wallet-adapter-phantom@^0.9.23":
+"@solana/wallet-adapter-phantom@^0.9.24":
   version "0.9.24"
-  resolved "https://registry.npmjs.org/@solana/wallet-adapter-phantom/-/wallet-adapter-phantom-0.9.24.tgz"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-phantom/-/wallet-adapter-phantom-0.9.24.tgz#9cc0c55d784f99f81a711bae895c38819960b2fc"
   integrity sha512-D24AxRHmRJ4AYoRvijbiuUb9LmC4xLGKLMSJS2ly+zGxVmaPASPM/ThaY/DlYTDL31QvkYtl8RzSR4yIU1gpLg==
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.23"
@@ -731,9 +731,9 @@
     "@solana/wallet-adapter-base" "^0.9.23"
     "@solana/wallet-standard-wallet-adapter-react" "^1.1.0"
 
-"@solana/wallet-adapter-solflare@^0.6.25":
+"@solana/wallet-adapter-solflare@^0.6.26":
   version "0.6.26"
-  resolved "https://registry.npmjs.org/@solana/wallet-adapter-solflare/-/wallet-adapter-solflare-0.6.26.tgz"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-solflare/-/wallet-adapter-solflare-0.6.26.tgz#d5ee8b03a8265a8246c16453e4578084c5886826"
   integrity sha512-QRp89hbByx3Ntj34l8q+N1usdVAbcdcX8GAkW0aYNlIIL1BzkK0zYYOY7rM6j1vIH/6+grXtiizjZ81V0jJhqA==
   dependencies:
     "@solana/wallet-adapter-base" "^0.9.23"
@@ -1353,7 +1353,7 @@ class-variance-authority@^0.7.0:
 
 classnames@^2.3.2:
   version "2.3.2"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 client-only@0.0.1:
@@ -1361,9 +1361,14 @@ client-only@0.0.1:
   resolved "https://registry.npmjs.org/client-only/-/client-only-0.0.1.tgz"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
-clsx@2.0.0, clsx@^2.0.0:
+clsx@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/clsx/-/clsx-2.0.0.tgz"
+  integrity sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==
+
+clsx@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.0.0.tgz#12658f3fd98fafe62075595a5c30e43d18f3d00b"
   integrity sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==
 
 color-convert@^2.0.1:
@@ -3392,12 +3397,12 @@ synckit@^0.8.5:
 
 tailwind-merge@^1.13.2, tailwind-merge@^1.14.0:
   version "1.14.0"
-  resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-1.14.0.tgz"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.14.0.tgz#e677f55d864edc6794562c63f5001f45093cdb8b"
   integrity sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==
 
 tailwind-variants@^0.1.13:
   version "0.1.13"
-  resolved "https://registry.yarnpkg.com/tailwind-variants/-/tailwind-variants-0.1.13.tgz#1f2a746d41e58266d900377944ca290bfa3d5256"
+  resolved "https://registry.npmjs.org/tailwind-variants/-/tailwind-variants-0.1.13.tgz"
   integrity sha512-G2M7M74hjq0nAo6QdEfUJgF+0t9DecFUw91GC1P9YTnwMcfB3uChT5U5e2DuNU42xoOz15lzo7r0mPdMzZkylg==
   dependencies:
     tailwind-merge "^1.13.2"
