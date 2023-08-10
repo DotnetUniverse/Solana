@@ -1,5 +1,9 @@
 # Solana
 
+<<<<<<< HEAD
+helo
+Nguyễn Văn Thanh Trung
+=======
 Create a Social-network Clone App using Gum
 - User registration and login using [solana wallet adapter](https://github.com/solana-labs/wallet-adapter).
 - Users can create a profile with their name, bio, profile picture, and cover image.
@@ -21,3 +25,4 @@ Good to have features:
 - The app should be well-designed and easy to use, with a clean and intuitive interface.
 - The app should be tested thoroughly to ensure all features are working as expected.
 
+>>>>>>> ea287681b6eb70b0ee98507896bec94e0def2d6d
