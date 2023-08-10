@@ -1,3 +1,10 @@
+import { MintNFTForm } from "@/components/form/mint-nft";
+
 export default function Page() {
-      return <h1>Hello, Mint cNFT.js!</h1>;
+      return (
+        <div>
+        <MintNFTForm/>
+      </div>
+        );
+      
     }
