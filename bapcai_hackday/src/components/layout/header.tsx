@@ -29,8 +29,8 @@ const components: { title: string; href: string; description: string }[] = [
             "Create Merkle Tree",
     },
     {
-        title: "Create NFT Collection",
-        href: "/createNFTCollection",
+        title: "create Event ticket",
+        href: "/createEventNFT",
         description:
             "Create your nft collection",
     },

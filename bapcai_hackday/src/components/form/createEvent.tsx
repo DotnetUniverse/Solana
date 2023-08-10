@@ -39,6 +39,7 @@ const formSchema = z.object({
     .min(1, "This field is required.")
     .max(1000, `The maximum allowed length for this field is 1000 characters`),
   externalUrl: z.string().trim().max(256, `The maximum allowed length for this field is 256 characters`).optional(),
+  max_supply: z.number().min(0), 
   collectionAddress: z.string().trim().optional(),
   attributes: z
     .array(
@@ -64,7 +65,7 @@ const formSchema = z.object({
   network: z.enum(Networks),
 })
 
-export function MintNFTForm() {
+export function CreateEventForm() {
   const { toast } = useToast()
   const { connected, publicKey, sendTransaction } = useWallet()
   const { connection } = useConnection()
@@ -76,6 +77,7 @@ export function MintNFTForm() {
       symbol: "",
       description: "",
       externalUrl: "",
+      max_supply: 0,
       collectionAddress: "",
       merkle_tree: "",
       receiver: "",
@@ -90,7 +92,7 @@ export function MintNFTForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(JSON.stringify(values))
+      console.log(values)
 
       if (!publicKey) {
         toast({
@@ -128,7 +130,6 @@ export function MintNFTForm() {
         share: 100,
         creator: publicKey.toBase58(),
       })
-      console.log(uploadMetadataResponse)
 
       if (!uploadMetadataResponse.success) {
         toast({
@@ -279,6 +280,38 @@ export function MintNFTForm() {
                 </FormItem>
               )}
             />
+             <FormField
+              control={form.control}
+              name="max_supply"
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Max supply</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="Max subpply (optional)"{...field} />
+                  </FormControl>
+                  <FormMessage />
+                  <FormDescription>
+                  Maximum amount of a NFT
+                  </FormDescription>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="max_supply"
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>Max supply</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="Max subpply (optional)"{...field} />
+                  </FormControl>
+                  <FormMessage />
+                  <FormDescription>
+                  Maximum amount of a NFT
+                  </FormDescription>
+                </FormItem>
+              )}
+            />
 
             {/* collection address */}
             <FormField
@@ -376,6 +409,7 @@ export function MintNFTForm() {
               name="receiver"
               render={({ field, fieldState }) => (
                 <FormItem>
+                    
                   <FormLabel>Receiver</FormLabel>
                   <FormControl>
                     <Input placeholder="Receiver wallet (optional)"  {...field} />

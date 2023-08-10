@@ -15,6 +15,8 @@ import {
 } from "@/types"
 import fetcher from "./fetcher"
 import { SHYFT_API_ENDPOINT } from "@/config/api"
+import dotenv from 'dotenv';
+dotenv.config();
 
 export function createTree(body: CreateMerkleTreeRequestBody) {
   return fetcher<BaseResponse<CreateMerkleTreeResult>>(`${SHYFT_API_ENDPOINT}/sol/v1/nft/compressed/create_tree`, {
@@ -28,6 +30,17 @@ export function createTree(body: CreateMerkleTreeRequestBody) {
 }
 
 export function mintNFT(body: MintNFTRequestBody) {
+  return fetcher<BaseResponse<MintNFTResult>>(`${SHYFT_API_ENDPOINT}/sol/v1/nft/compressed/mint`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": process.env.NEXT_PUBLIC_SHYFT_API_KEY!,
+    },
+    body: JSON.stringify(body),
+  })
+}
+
+export function mintNFTWSecret(body: MintNFTRequestBody) {
   return fetcher<BaseResponse<MintNFTResult>>(`${SHYFT_API_ENDPOINT}/sol/v1/nft/compressed/mint`, {
     method: "POST",
     headers: {
@@ -101,12 +114,12 @@ export function upload(file: File) {
 }
 
 export function uploadMetadata(metadata: UploadMetadataRequestBody) {
-  return fetcher<BaseResponse<UploadResult>>(`${SHYFT_API_ENDPOINT}/sol/v1/metadata/create`, {
+  return (fetcher<BaseResponse<UploadResult>>(`${SHYFT_API_ENDPOINT}/sol/v1/metadata/create`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
       "x-api-key": process.env.NEXT_PUBLIC_SHYFT_API_KEY!,
     },
     body: JSON.stringify(metadata),
-  })
+  }))
 }
