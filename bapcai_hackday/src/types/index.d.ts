@@ -48,11 +48,40 @@ export type MintNFTRequestBody = {
   fee_payer?: string
 }
 
+export type CreateNFTV2RequestBody = {
+  network: Network
+  creator_wallet: string
+  name: string
+  symbol: string
+  description: string
+  max_supply: number
+  collection_address?: string
+  fee_payer?: string
+  service_charge?:string
+  image?: string
+  royalty: number
+  external_url: string
+  attributes?: Array<{
+    trait_type: string
+    value: any
+  }>
+  files?: Array<{
+    uri: string
+    type: string
+  }>
+}
+
 export type MintNFTResult = {
   encoded_transaction: string
   mint: string
   signers: Array<string>
 }
+
+export type CreateV2Result = {
+  encoded_transaction: string;
+  mint:                string;
+}
+
 
 export type TransferNFTRequestBody = {
   network: Network

@@ -4,6 +4,8 @@ import {
   BurnNFTResult,
   CreateMerkleTreeRequestBody,
   CreateMerkleTreeResult,
+  CreateNFTV2RequestBody,
+  CreateV2Result,
   MintNFTRequestBody,
   MintNFTResult,
   Network,
@@ -46,9 +48,9 @@ export function mintNFT(body: MintNFTRequestBody) {
   );
 }
 
-export function mintNFTWSecret(body: MintNFTRequestBody) {
-  return fetcher<BaseResponse<MintNFTResult>>(
-    `${SHYFT_API_ENDPOINT}/sol/v1/nft/compressed/mint`,
+export function mintNFTV2(body: CreateNFTV2RequestBody) {
+  return fetcher<BaseResponse<CreateV2Result>>(
+    `${SHYFT_API_ENDPOINT}/sol/v2/nft/create`,
     {
       method: "POST",
       headers: {

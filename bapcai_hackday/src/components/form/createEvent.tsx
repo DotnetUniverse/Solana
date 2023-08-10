@@ -11,7 +11,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Networks } from "@/config/enum"
-import { mintNFT, upload, uploadMetadata } from "../../shared/shyft"
+import { mintNFT, mintNFTV2, upload, uploadMetadata } from "../../shared/shyft"
 import ConnectWalletButton from "@/components/wallet/ConnectWalletButton"
 import { NetworkSelect } from "@/components/wallet/network-select"
 // import { AspectRatio } from "./ui/aspect-ratio"
@@ -39,7 +39,7 @@ const formSchema = z.object({
     .min(1, "This field is required.")
     .max(1000, `The maximum allowed length for this field is 1000 characters`),
   externalUrl: z.string().trim().max(256, `The maximum allowed length for this field is 256 characters`).optional(),
-  max_supply: z.number().min(0), 
+  max_supply:z.number(),
   collectionAddress: z.string().trim().optional(),
   attributes: z
     .array(
@@ -57,11 +57,6 @@ const formSchema = z.object({
       })
     )
     .optional(),
-  merkle_tree: z.string({
-    invalid_type_error: "This field is required.",
-    required_error: "This field is required.",
-  }),
-  receiver: z.string().optional(),
   network: z.enum(Networks),
 })
 
@@ -79,8 +74,6 @@ export function CreateEventForm() {
       externalUrl: "",
       max_supply: 0,
       collectionAddress: "",
-      merkle_tree: "",
-      receiver: "",
       network: "devnet",
     },
   })
@@ -113,10 +106,15 @@ export function CreateEventForm() {
         return
       }
 
-      const uploadMetadataResponse = await uploadMetadata({
+      const response = await mintNFTV2({
+        creator_wallet: publicKey.toBase58(),
         name: values.name,
         symbol: values.symbol,
-        description: values.description ?? "",
+        collection_address: values.collectionAddress,
+        fee_payer: publicKey.toBase58(),
+        network: values.network,
+        description: values.description??"",
+        max_supply: values.max_supply,
         image: uploadResponse.result.uri,
         external_url: values.externalUrl ?? "",
         attributes: values.attributes ?? [],
@@ -127,55 +125,34 @@ export function CreateEventForm() {
           },
         ],
         royalty: 500, // 5%
-        share: 100,
-        creator: publicKey.toBase58(),
       })
 
-      if (!uploadMetadataResponse.success) {
-        toast({
-          variant: "destructive",
-          title: "Upload error",
-          description: uploadMetadataResponse.message ?? "Unknown error",
-        })
-        return
-      }
+      // if (response.success) {
+      //   const tx = Transaction.from(Buffer.from(response.result.encoded_transaction, "base64"))
+      //   const signature = await sendTransaction(tx, connection)
+      //   await connection.confirmTransaction(signature, "confirmed")
 
-      const response = await mintNFT({
-        creator_wallet: publicKey.toBase58(),
-        metadata_uri: uploadMetadataResponse.result.uri,
-        merkle_tree: values.merkle_tree,
-        collection_address: values.collectionAddress,
-        receiver: values.receiver,
-        fee_payer: publicKey.toBase58(),
-        network: values.network,
-      })
-
-      if (response.success) {
-        const tx = Transaction.from(Buffer.from(response.result.encoded_transaction, "base64"))
-        const signature = await sendTransaction(tx, connection)
-        await connection.confirmTransaction(signature, "confirmed")
-
-        toast({
-          variant: "default",
-          title: "Your NFT minted successfully",
-          description: (
-            <a
-              className="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={`https://translator.shyft.to/tx/${signature}?cluster=${values.network}`}
-            >
-              View transaction
-            </a>
-          ),
-        })
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Error :(",
-          description: response.message ?? "Unknown error",
-        })
-      }
+      //   toast({
+      //     variant: "default",
+      //     title: "Your NFT minted successfully",
+      //     description: (
+      //       <a
+      //         className="underline"
+      //         target="_blank"
+      //         rel="noopener noreferrer"
+      //         href={`https://translator.shyft.to/tx/${signature}?cluster=${values.network}`}
+      //       >
+      //         View transaction
+      //       </a>
+      //     ),
+      //   })
+      // } else {
+      //   toast({
+      //     variant: "destructive",
+      //     title: "Error :(",
+      //     description: response.message ?? "Unknown error",
+      //   })
+      // }
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -196,7 +173,7 @@ export function CreateEventForm() {
               name="image"
               render={({ field }) => (
                 <FormItem className="w-full max-w-[240px]">
-                  <FormLabel>Image</FormLabel>
+                  <FormLabel>Your Events NFT Image</FormLabel>
                   <AspectRatio ratio={1 / 1}>
                     <Uploader
                       {...field}
@@ -224,7 +201,7 @@ export function CreateEventForm() {
               name="name"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Your Event NFT Name</FormLabel>
                   <FormControl>
                     <Input placeholder="NFT name"  {...field} />
                   </FormControl>
@@ -239,7 +216,7 @@ export function CreateEventForm() {
               name="symbol"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Symbol</FormLabel>
+                  <FormLabel>Your Event NFT Symbol</FormLabel>
                   <FormControl>
                     <Input placeholder="NFT symbol" {...field} />
                   </FormControl>
@@ -254,7 +231,7 @@ export function CreateEventForm() {
               name="description"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Your Event NFT Description</FormLabel>
                   <FormControl>
                     <Textarea rows={6} placeholder="NFT description"  {...field} />
                   </FormControl>
@@ -269,7 +246,7 @@ export function CreateEventForm() {
               name="externalUrl"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>External URL</FormLabel>
+                  <FormLabel>External URL For Your Event</FormLabel>
                   <FormControl>
                     <Input placeholder="External URL (optional)"{...field} />
                   </FormControl>
@@ -280,38 +257,24 @@ export function CreateEventForm() {
                 </FormItem>
               )}
             />
-             <FormField
-              control={form.control}
-              name="max_supply"
-              render={({ field, fieldState }) => (
-                <FormItem>
-                  <FormLabel>Max supply</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="Max subpply (optional)"{...field} />
-                  </FormControl>
-                  <FormMessage />
-                  <FormDescription>
-                  Maximum amount of a NFT
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
+            {/* Max supply */}
             <FormField
               control={form.control}
               name="max_supply"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Max supply</FormLabel>
+                  <FormLabel>Your Event NFT Quantity</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Max subpply (optional)"{...field} />
+                    <Input  placeholder="Max subpply (optional)"{...field} />
                   </FormControl>
                   <FormMessage />
                   <FormDescription>
-                  Maximum amount of a NFT
+                    Maximum amount of a NFT
                   </FormDescription>
                 </FormItem>
               )}
             />
+
 
             {/* collection address */}
             <FormField
@@ -382,44 +345,12 @@ export function CreateEventForm() {
                 append({ trait_type: "", value: "" })
               }}
               size="sm"
-              
+
               className="self-start"
             >
               Add attributes
             </Button>
-
-            {/* merkle tree */}
-            <FormField
-              control={form.control}
-              name="merkle_tree"
-              render={({ field, fieldState }) => (
-                <FormItem>
-                  <FormLabel>Merkle tree</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Merkle tree address" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* receiver */}
-            <FormField
-              control={form.control}
-              name="receiver"
-              render={({ field, fieldState }) => (
-                <FormItem>
-                    
-                  <FormLabel>Receiver</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Receiver wallet (optional)"  {...field} />
-                  </FormControl>
-                  <FormMessage />
-                  <FormDescription>Account address which will receive the newly created NFT.</FormDescription>
-                </FormItem>
-              )}
-            />
-
+            {/* network */}
             <FormField
               control={form.control}
               name="network"
@@ -441,14 +372,14 @@ export function CreateEventForm() {
             />
           </div>
           <div className="flex justify-end">
-          {form.formState.isSubmitting ? "loading..." : ""}
-              {connected ? (
-                <Button type="submit">
-                  Create
-                </Button>
-              ) : (
-                <ConnectWalletButton>Connect Wallet</ConnectWalletButton>
-              )}
+            {form.formState.isSubmitting ? "loading..." : ""}
+            {connected ? (
+              <Button type="submit">
+                Create
+              </Button>
+            ) : (
+              <ConnectWalletButton>Connect Wallet</ConnectWalletButton>
+            )}
           </div>
         </form>
       </Form>
