@@ -7,7 +7,7 @@ import { NetworkSelect } from "@/components/wallet/network-select";
 import { NFTItem, NFTItemSkeleton } from "@/components/form/get-nft-item";
 import { Button } from "@/components/ui/button";
 import { SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 import { Typography } from "@/components/ui/typography";
 import { readAllNFTs } from "@/shared/shyft";
 import { Network, Nft } from "@/types";
@@ -28,7 +28,7 @@ export default function Transfer() {
             setNFTs(response.result.nfts);
           } else {
             toast({
-              variant: "error",
+              variant: "destructive",
               title: "Error",
               description: response.message ?? "Unknown error",
             });
@@ -36,7 +36,7 @@ export default function Transfer() {
         })
         .catch((error: any) => {
           toast({
-            variant: "error",
+            variant: "destructive",
             title: "Error",
             description: error?.message ?? "Unknown error",
           });
