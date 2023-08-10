@@ -29,10 +29,10 @@ export const Layout = ({ children }: PropsWithChildren) => {
             <ConnectionProvider endpoint={endpoint}>
                 <WalletProvider wallets={wallets} autoConnect>
                     <WalletModalProvider>
-                        <header className="flex flex-row justify-between items-center sticky w-full  top-0 z-50 border-b backdrop-blur p-4">
+                        <header className="flex flex-row justify-between items-center sticky w-full top-0 z-50 border-b backdrop-blur p-4">
                             <div className="flex flex-row justify-between items-center gap-4">
-                                <h1 className="text-2xl text-green-500 text-whitespace-nowrap">B A P C A I</h1>
                                 <NavigationMenuHeader />
+                                <h1 className="text-2xl text-green-500 text-whitespace-nowrap">B A P C A I</h1>
                             </div>
                             <div className="flex flex-row justify-center items-center">
                                 <ConnectWalletButton />
@@ -40,7 +40,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
                             </div>
                         </header>
 
-                        <main className="flex justify-center py-4 min-h-screen">
+                        <main className="flex justify-center p-4 min-h-screen">
                             {children}
                         </main>
                     </WalletModalProvider>
