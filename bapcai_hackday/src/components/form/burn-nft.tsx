@@ -46,7 +46,7 @@ export function BurnNFTForm() {
     try {
       if (!publicKey) {
         toast({
-          variant: "warning",
+          variant: "destructive",
           title: "Please connect to your wallet",
         })
         return
@@ -64,7 +64,7 @@ export function BurnNFTForm() {
         await connection.confirmTransaction(signature, "confirmed")
 
         toast({
-          variant: "success",
+          variant: "default",
           title: "NFT burned successfully",
           description: (
             <a
@@ -79,14 +79,14 @@ export function BurnNFTForm() {
         })
       } else {
         toast({
-          variant: "error",
+          variant: "destructive",
           title: "Error :(",
           description: response.message ?? "Unknown error",
         })
       }
     } catch (error: any) {
       toast({
-        variant: "error",
+        variant: "destructive",
         title: "Error :(",
         description: error?.message ?? "Unknown error",
       })
@@ -107,7 +107,7 @@ export function BurnNFTForm() {
             })
           } else {
             toast({
-              variant: "error",
+              variant: "destructive",
               title: "Error",
               description: response.message ?? "Unknown error",
             })
@@ -115,7 +115,7 @@ export function BurnNFTForm() {
         })
         .catch((error: any) => {
           toast({
-            variant: "error",
+            variant: "destructive",
             title: "Error",
             description: error?.message ?? "Unknown error",
           })
@@ -139,7 +139,7 @@ export function BurnNFTForm() {
                 <FormItem>
                   <FormLabel>Merkle tree</FormLabel>
                   <FormControl>
-                    <Input placeholder="Merkle tree address" disabled ={fieldState.invalid} {...field} />
+                    <Input placeholder="Merkle tree address" disabled={fieldState.invalid} {...field} />
                   </FormControl>
                   <FormDescription>Merkle tree where NFT present</FormDescription>
                   <FormMessage />
