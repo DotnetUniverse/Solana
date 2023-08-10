@@ -111,7 +111,7 @@ export function CreateTreeForm() {
     <div className="max-w-xl mx-auto">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="rounded-2xl shadow-card bg-black flex flex-col gap-5 p-5 mb-5">
+          <div className="rounded-2xl shadow-car flex flex-col gap-5 p-5 mb-5">
             <FormField
               control={form.control}
               name="number_of_nodes"
