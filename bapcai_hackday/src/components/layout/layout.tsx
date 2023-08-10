@@ -13,6 +13,7 @@ import type { AppProps } from "next/app"
 import type { FC, PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { NavigationMenuHeader } from "./header"
+import Link from "next/link"
 
 require("@solana/wallet-adapter-react-ui/styles.css")
 
@@ -32,7 +33,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
                         <header className="flex flex-row justify-between items-center sticky w-full top-0 z-50 border-b backdrop-blur p-4">
                             <div className="flex flex-row justify-between items-center gap-4">
                                 <NavigationMenuHeader />
-                                <h1 className="text-2xl text-green-500 text-whitespace-nowrap">B A P C A I</h1>
+                                <Link href="/" className="text-2xl text-green-500 text-whitespace-nowrap">B A P C A I</Link>
                             </div>
                             <div className="flex flex-row justify-center items-center">
                                 <ConnectWalletButton />

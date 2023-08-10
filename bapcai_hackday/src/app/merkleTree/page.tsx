@@ -1,3 +1,9 @@
+import { CreateTreeForm } from "@/components/form/tree";
+
 export default function Page() {
-      return <h1>Hello, Merkle Tree.js!</h1>;
-    }
+  return (
+    <div>
+      <CreateTreeForm />
+    </div>
+  );
+}
