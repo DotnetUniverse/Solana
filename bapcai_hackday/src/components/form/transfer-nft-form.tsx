@@ -166,7 +166,7 @@ export function TransferNFTForm() {
     <div className="max-w-xl mx-auto">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="rounded-2xl shadow-card bg-white flex flex-col gap-5 p-5 mb-5">
+          <div className="rounded-2xl shadow-card flex flex-col gap-5 p-5 mb-5">
             {/* merkle tree */}
             <FormField
               control={form.control}
