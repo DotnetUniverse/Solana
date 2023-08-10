@@ -64,7 +64,6 @@ export function NavigationMenuHeader() {
 
         <NavigationMenu>
             <NavigationMenuList>
-
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
                     <NavigationMenuContent>
