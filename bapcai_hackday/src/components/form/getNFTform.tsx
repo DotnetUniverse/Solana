@@ -85,7 +85,7 @@ export default function Transfer() {
                   <Typography className="font-semibold" color="secondary">
                     No cNFT
                   </Typography>
-                  <Link href="/mint">
+                  <Link href="/mintcNFT">
                     <Button>Create one</Button>
                   </Link>
                 </div>
