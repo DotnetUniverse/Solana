@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    optimization: {
+        runtimeChunk: 'single'
+    },
+}
 
 module.exports = nextConfig
