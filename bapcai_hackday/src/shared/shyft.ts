@@ -10,6 +10,7 @@ import {
   MintNFTResult,
   Network,
   Nft,
+  Nftcompress,
   TransferNFTRequestBody,
   TransferNFTResult,
   UploadMetadataRequestBody,
@@ -90,7 +91,7 @@ export function burnNFT(body: BurnNFTRequestBody) {
   );
 }
 // {{url}}/nft/read_all?network=devnet&address=CtAzDwc4wTUApLdhjMYX4dWPbzLa9uA5JWLxvhuzZ6k4
-export function readAllNFTs(wallet: string, network: Network) {
+export function readAllNFT(wallet: string, network: Network) {
   return fetcher<BaseResponse<Nft[]>>(
     `${SHYFT_API_ENDPOINT}/sol/v1/nft/read_all?network=${network}&address=${wallet}`,
     {
@@ -101,6 +102,18 @@ export function readAllNFTs(wallet: string, network: Network) {
       },
     }
   );
+}
+export function readAllNFTs(wallet: string, network: Network) {
+  return fetcher<BaseResponse<{ nfts: Nftcompress[] }>>(
+    `${SHYFT_API_ENDPOINT}/sol/v1/nft/compressed/read_all?network=${network}&wallet_address=${wallet}`,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": "QedCXi-__1YxirlR",
+      },
+    }
+  )
 }
 
 export function readNFT(nftAddress: string, network: Network) {

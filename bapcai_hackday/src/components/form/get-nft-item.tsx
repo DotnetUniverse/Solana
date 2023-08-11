@@ -2,10 +2,16 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Typography } from "@/components/ui/typography";
-import { Network, Nft } from "@/types";
+import { Network, Nft, Nftcompress } from "@/types";
 
 type NFTItemProps = {
-  nft: Nft;
+  nft: Nftcompress;
+  network: Network;
+};
+
+
+type NFTItemPropsl = {
+  nftl: Nft;
   network: Network;
 };
 
@@ -34,6 +40,38 @@ export function NFTItem({ nft, network }: NFTItemProps) {
             className="line-clamp-2 text-ellipsis"
           >
             {nft.description}
+          </Typography>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+export function NFTItemls({ nftl, network }: NFTItemPropsl) {
+  console.log(nftl)
+  return (
+    <a
+      href={`https://translator.shyft.to/address/${nftl.mint}?cluster=${network}&compressed=true`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className="overflow-hidden rounded-2xl shadow-card backdrop-blur">
+        <AspectRatio>
+          <img
+            className="w-full h-auto object-cover"
+            src={nftl.cached_image_uri ?? nftl.image_uri}
+            alt={nftl.name}
+          />
+        </AspectRatio>
+        <div className="p-5 w-full">
+          <Typography className="mb-2 font-semibold">{nftl.name}</Typography>
+          <Typography
+            as="p"
+            color="secondary"
+            level="body4"
+            className="line-clamp-2 text-ellipsis"
+          >
+            {nftl.description}
           </Typography>
         </div>
       </div>

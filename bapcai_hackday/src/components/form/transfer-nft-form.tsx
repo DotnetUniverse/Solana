@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/select";
 import { Networks } from "@/config/enum";
 import { readAllNFTs, transferNFT } from "@/shared/shyft";
-import { Nft } from "@/types";
+import { Nft, Nftcompress } from "@/types";
 import ConnectWalletButton from "@/components/wallet/ConnectWalletButton";
 import { NetworkSelect } from "@/components/wallet/network-select";
 import { useToast } from "@/components/ui/use-toast";
@@ -35,7 +35,8 @@ export function TransferNFTForm() {
   const { toast } = useToast();
   const { connected, publicKey, sendTransaction } = useWallet();
   const { connection } = useConnection();
-  const [nfts, setNFTs] = useState<Nft[]>([]);
+  const [nfts, setNFTs] = useState<Nftcompress[]>([]);
+  // const [nftls, setNFTls] = useState<Nft[]>([]);
   const [loading, setLoading] = useState(false);
 
   const formSchema = useMemo(() => {
